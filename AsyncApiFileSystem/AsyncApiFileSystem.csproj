@@ -6,10 +6,28 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-    <PackageReference Include="OptRes" Version="6.0.0" />
-  </ItemGroup>
+	<PropertyGroup>
+		<VersionPrefix>0.0.1</VersionPrefix>
+		<Description>Library for a simple api for async long running requests, using the file system.</Description>
+		<PackageProjectUrl>https://ugur-arikan.github.io/AsyncApiFileSystem/</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Ugur-Arikan/AsyncApiFileSystem</RepositoryUrl>
+		<Authors>ugur-arikan</Authors>
+		<PackageTags>asynchronous;api;long running task;file system</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+		<PackageReference Include="OptRes" Version="6.0.0" />
+	</ItemGroup>
 
 </Project>
