@@ -4,10 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
 	<PropertyGroup>
-		<VersionPrefix>0.0.1</VersionPrefix>
+		<VersionPrefix>0.0.2</VersionPrefix>
 		<Description>Library for a simple api for async long running requests, using the file system.</Description>
 		<PackageProjectUrl>https://ugur-arikan.github.io/AsyncApiFileSystem/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Ugur-Arikan/AsyncApiFileSystem</RepositoryUrl>
@@ -27,7 +28,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-		<PackageReference Include="OptRes" Version="6.0.0" />
+		<PackageReference Include="OptRes" Version="6.1.1" />
 	</ItemGroup>
 
 </Project>

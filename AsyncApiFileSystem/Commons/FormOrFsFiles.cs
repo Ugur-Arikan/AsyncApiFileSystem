@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
-namespace AsyncFileSystem.Commons;
+namespace AsyncApiFileSystem.Commons;
 
-public class FormOrFsFiles
+/// <summary>
+/// Collection of files which can either be from a web-form or file-system.
+/// </summary>
+public class FormOrFileSystemFiles
 {
     // data
     readonly Opt<IFormFileCollection?> Form;
@@ -9,37 +12,58 @@ public class FormOrFsFiles
 
 
     // ctor
-    public FormOrFsFiles(string[] paths)
+    /// <summary>
+    /// Constructs the files object as file-system files with the given <paramref name="paths"/>.
+    /// </summary>
+    /// <param name="paths">Paths of the files in the file system.</param>
+    public FormOrFileSystemFiles(string[] paths)
     {
         Form = None<IFormFileCollection?>();
         Paths = Some(paths);
     }
-    public FormOrFsFiles(IFormFileCollection? form)
+    /// <summary>
+    /// Constructs the files object from the file-collection of a web-form.
+    /// </summary>
+    /// <param name="formFileCollection">File collection of the form.</param>
+    public FormOrFileSystemFiles(IFormFileCollection? formFileCollection)
     {
-        Form = Some(form);
+        Form = Some(formFileCollection);
         Paths = None<string[]>();
     }
-    public FormOrFsFiles(HttpRequest request)
+    /// <summary>
+    /// onstructs the files object from the file-collection of the web-form of the <paramref name="request"/>.
+    /// </summary>
+    /// <param name="request">Request to create the files for.</param>
+    public FormOrFileSystemFiles(HttpRequest request)
         : this(request.Form?.Files)
     {
     }
 
 
     // method
+    /// <summary>
+    /// Number of files.
+    /// </summary>
     public int Count
         => Form.Match(frm => frm == null ? 0 : frm.Count, () => Paths.Unwrap().Length);
-    public Res<FormOrFsFiles> Validate(string[] expectedFiles)
+    /// <summary>
+    /// Validates the files-object by checking whether all <paramref name="expectedFileNames"/> exist or not.
+    /// Returns the Err if validation fails; Ok of itself otherwise.
+    /// </summary>
+    /// <param name="expectedFileNames">Collection of expected file names.</param>
+    /// <returns></returns>
+    public Res<FormOrFileSystemFiles> Validate(string[] expectedFileNames)
     {
         if (Form.IsSome)
         {
             var files = Form.Unwrap();
             int nbFiles = files == null ? 0 : files.Count;
-            if (files == null || nbFiles != expectedFiles.Length)
-                return Err<FormOrFsFiles>($"{nbFiles} files are provided. However, {expectedFiles.Length} input files are expected: {string.Join(", ", expectedFiles)}.");
+            if (files == null || nbFiles != expectedFileNames.Length)
+                return Err<FormOrFileSystemFiles>($"{nbFiles} files are provided. However, {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
 
             foreach (var file in files)
-                if (!expectedFiles.Contains(file.FileName))
-                    return Err<FormOrFsFiles>($"Unexpected file '{file.FileName}': {expectedFiles.Length} input files are expected: {string.Join(", ", expectedFiles)}.");
+                if (!expectedFileNames.Contains(file.FileName))
+                    return Err<FormOrFileSystemFiles>($"Unexpected file '{file.FileName}': {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
 
             return Ok(this);
         }
@@ -47,16 +71,20 @@ public class FormOrFsFiles
         {
             var files = Paths.Unwrap();
             int nbFiles = files == null ? 0 : files.Length;
-            if (files == null || nbFiles != expectedFiles.Length)
-                return Err<FormOrFsFiles>($"{nbFiles} files are provided. However, {expectedFiles.Length} input files are expected: {string.Join(", ", expectedFiles)}.");
+            if (files == null || nbFiles != expectedFileNames.Length)
+                return Err<FormOrFileSystemFiles>($"{nbFiles} files are provided. However, {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
 
             foreach (var file in files)
-                if (!expectedFiles.Contains(Path.GetFileName(file)))
-                    return Err<FormOrFsFiles>($"Unexpected file '{Path.GetFileName(file)}': {expectedFiles.Length} input files are expected: {string.Join(", ", expectedFiles)}.");
+                if (!expectedFileNames.Contains(Path.GetFileName(file)))
+                    return Err<FormOrFileSystemFiles>($"Unexpected file '{Path.GetFileName(file)}': {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
 
             return Ok(this);
         }
     }
+    /// <summary>
+    /// Tries to copy all files to the <paramref name="targetDirectory"/> and returns the result.
+    /// </summary>
+    /// <param name="targetDirectory">Target directory to copy the files to.</param>
     public Res CopyFilesToDir(string targetDirectory)
     {
         if (Form.IsSome)
@@ -92,6 +120,11 @@ public class FormOrFsFiles
             });
         }
     }
+    /// <summary>
+    /// Tries to copy all files to the <paramref name="targetDirectory"/> and returns the result.
+    /// </summary>
+    /// <param name="targetDirectory">Target directory to copy the files to.</param>
+    /// <param name="filenamesToSaveAs">Filenames to overwrite the names of the copied files.</param>
     public Res CopyFilesToDirWithNames(string targetDirectory, IEnumerable<string> filenamesToSaveAs)
     {
         var enumFilenames = filenamesToSaveAs.GetEnumerator();
@@ -135,7 +168,12 @@ public class FormOrFsFiles
             });
         }
     }
-    public Res DeleteFilesFromDir(string jobDirectory)
+    /// <summary>
+    /// Tries to delete files from the <paramref name="targetDirectory"/> and returns the result.
+    /// </summary>
+    /// <param name="targetDirectory">Target directory to delete the files from.</param>
+    /// <returns></returns>
+    public Res DeleteFilesFromDir(string targetDirectory)
     {
         if (Form.IsSome)
         {
@@ -143,20 +181,23 @@ public class FormOrFsFiles
             if (files == null)
                 throw Exc.MustNotReach;
             return
-                files.Select(f => Path.Join(jobDirectory, f.FileName))
+                files.Select(f => Path.Join(targetDirectory, f.FileName))
                 .Select(p => Ok().Try(() => File.Delete(p))).Reduce(false);
         }
         else
         {
             return
                 Paths.Unwrap()
-                .Select(origPath => Path.Join(jobDirectory, Path.GetFileName(origPath)))
+                .Select(origPath => Path.Join(targetDirectory, Path.GetFileName(origPath)))
                 .Select(p => Ok().Try(() => File.Delete(p))).Reduce(false);
         }
     }
 
-
-    public string GetFilename(int index)
+    /// <summary>
+    /// Returns the name of the file with the given index.
+    /// </summary>
+    /// <param name="index">Index of the file.</param>
+    string GetFilename(int index)
     {
         if (Form.IsSome)
         {

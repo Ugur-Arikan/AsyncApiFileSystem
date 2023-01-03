@@ -1,6 +1,7 @@
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\bin\Debug\net6.0\AsyncApiFileSystem.deps.json
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\bin\Debug\net6.0\AsyncApiFileSystem.dll
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\bin\Debug\net6.0\AsyncApiFileSystem.pdb
+I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\bin\Debug\net6.0\AsyncApiFileSystem.xml
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\obj\Debug\net6.0\AsyncApiFileSystem.csproj.AssemblyReference.cache
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\obj\Debug\net6.0\AsyncApiFileSystem.GeneratedMSBuildEditorConfig.editorconfig
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\obj\Debug\net6.0\AsyncApiFileSystem.AssemblyInfoInputs.cache
@@ -8,5 +9,6 @@ I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\obj\Debug\net6.0\AsyncApi
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\obj\Debug\net6.0\AsyncApiFileSystem.csproj.CoreCompileInputs.cache
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\obj\Debug\net6.0\AsyncApiFileSystem.dll
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\obj\Debug\net6.0\refint\AsyncApiFileSystem.dll
+I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\obj\Debug\net6.0\AsyncApiFileSystem.xml
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\obj\Debug\net6.0\AsyncApiFileSystem.pdb
 I:\uurdev\dotnet\AsyncApiFileSystem\AsyncApiFileSystem\obj\Debug\net6.0\ref\AsyncApiFileSystem.dll

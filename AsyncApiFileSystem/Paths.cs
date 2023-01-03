@@ -1,6 +1,6 @@
 ﻿using System.IO.Compression;
 
-namespace AsyncFileSystem;
+namespace AsyncApiFileSystem;
 
 internal record Paths<K, F>(string Dir, F IdFact)
     where K : IComparable<K>, IEquatable<K>
@@ -21,12 +21,12 @@ internal record Paths<K, F>(string Dir, F IdFact)
     // id
     public Res<K> NewId()
         => IdFact.NewId(Dir);
-    public Res<bool> Exists(K id)
-        => OkIf(Directory.Exists(Dir)).TryMap(() => Directory.Exists(Path.Join(Dir, DirOf(id))));
+    public bool Exists(K id)
+        => Directory.Exists(Path.Join(Dir, DirOf(id)));
 
 
     // io
-    public Res<int> GetNbResults()
+    public Res<int> GetNbJobs()
         => OkIf(Directory.Exists(Dir))
         .TryMap(() => Directory.GetDirectories(Dir).Length);
     public Res<HashSet<K>> GetAllIds()
