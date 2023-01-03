@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace AsyncFileSystem;
+namespace AsyncApiFileSystem;
 
 internal static class Singletons
 {

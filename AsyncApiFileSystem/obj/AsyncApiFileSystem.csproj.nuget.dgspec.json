@@ -5,7 +5,7 @@
   },
   "projects": {
     "I:\\uurdev\\dotnet\\AsyncApiFileSystem\\AsyncApiFileSystem\\AsyncApiFileSystem.csproj": {
-      "version": "0.0.1",
+      "version": "0.0.2",
       "restore": {
         "projectUniqueName": "I:\\uurdev\\dotnet\\AsyncApiFileSystem\\AsyncApiFileSystem\\AsyncApiFileSystem.csproj",
         "projectName": "AsyncApiFileSystem",
@@ -50,7 +50,7 @@
             },
             "OptRes": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[6.1.1, )"
             }
           },
           "imports": [
@@ -69,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

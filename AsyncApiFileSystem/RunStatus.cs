@@ -1,5 +1,13 @@
-﻿namespace AsyncFileSystem;
+﻿namespace AsyncApiFileSystem;
 
+/// <summary>
+/// Status of the run (execution) of a particular job.
+/// </summary>
+/// <typeparam name="K">Type of the id (key) of the job.</typeparam>
+/// <param name="Id">Id (key) of the job.</param>
+/// <param name="TimeBegin">Time when the job began its execution.</param>
+/// <param name="TimeEnd">Time when the job's execution ended; None if it is still ongoing.</param>
+/// <param name="Error">Error message associated with the failure of the job; None if there exists no error.</param>
 public record RunStatus<K>(
     K Id,
     DateTime TimeBegin,
@@ -31,6 +39,12 @@ public record RunStatus<K>(
 
 
     // method
+    /// <summary>
+    /// Returns whether the job is completed or not.
+    /// </summary>
     public bool IsCompleted => TimeEnd.IsSome;
+    /// <summary>
+    /// Returns whether the job execution encountered an error or not.
+    /// </summary>
     public bool IsError => Error.IsSome;
 }

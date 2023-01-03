@@ -1,4 +1,4 @@
-﻿namespace AsyncFileSystem;
+﻿namespace AsyncApiFileSystem;
 
 internal class Writers : IDisposable
 {
