@@ -5,7 +5,7 @@
   },
   "projects": {
     "I:\\uurdev\\dotnet\\AsyncApiFileSystem\\AsyncApiFileSystem\\AsyncApiFileSystem.csproj": {
-      "version": "0.0.2",
+      "version": "0.0.3",
       "restore": {
         "projectUniqueName": "I:\\uurdev\\dotnet\\AsyncApiFileSystem\\AsyncApiFileSystem\\AsyncApiFileSystem.csproj",
         "projectName": "AsyncApiFileSystem",

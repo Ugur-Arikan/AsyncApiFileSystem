@@ -197,7 +197,7 @@ public class FormOrFileSystemFiles
     /// Returns the name of the file with the given index.
     /// </summary>
     /// <param name="index">Index of the file.</param>
-    string GetFilename(int index)
+    public string GetFilename(int index)
     {
         if (Form.IsSome)
         {

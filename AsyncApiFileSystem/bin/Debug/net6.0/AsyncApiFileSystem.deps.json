@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "AsyncApiFileSystem/0.0.2": {
+      "AsyncApiFileSystem/0.0.3": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
@@ -68,7 +68,7 @@
     }
   },
   "libraries": {
-    "AsyncApiFileSystem/0.0.2": {
+    "AsyncApiFileSystem/0.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
