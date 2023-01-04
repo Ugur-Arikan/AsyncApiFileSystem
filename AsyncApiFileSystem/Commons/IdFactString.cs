@@ -3,15 +3,15 @@
 /// <summary>
 /// A string-id factory which auto-generates ids as numbers.
 /// </summary>
-public class RunIdFactoryString : IRunIdFactory<string>
+public class IdFactString : IIdFactory<string>
 {
     /// <summary>
-    /// Auto-generates and returns a unique new id.
+    /// AAuto-generates and returns a new unique key.
     /// </summary>
     /// <param name="existingIds">Set of ids that already exist, with an associated execution directory.</param>
     public string NewId(HashSet<string> existingIds)
     {
-        for (int i = 0; i < existingIds.Count + 1; i++)
+        for (int i = 0; i < existingIds.Count + 10; i++)
         {
             string id = i.ToString();
             if (!existingIds.Contains(id))

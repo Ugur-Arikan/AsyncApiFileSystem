@@ -4,7 +4,7 @@ namespace AsyncApiFileSystem.Commons;
 /// <summary>
 /// Collection of files which can either be from a web-form or file-system.
 /// </summary>
-public class FormOrFileSystemFiles
+public class FilesInput
 {
     // data
     readonly Opt<IFormFileCollection?> Form;
@@ -16,7 +16,7 @@ public class FormOrFileSystemFiles
     /// Constructs the files object as file-system files with the given <paramref name="paths"/>.
     /// </summary>
     /// <param name="paths">Paths of the files in the file system.</param>
-    public FormOrFileSystemFiles(string[] paths)
+    public FilesInput(string[] paths)
     {
         Form = None<IFormFileCollection?>();
         Paths = Some(paths);
@@ -25,7 +25,7 @@ public class FormOrFileSystemFiles
     /// Constructs the files object from the file-collection of a web-form.
     /// </summary>
     /// <param name="formFileCollection">File collection of the form.</param>
-    public FormOrFileSystemFiles(IFormFileCollection? formFileCollection)
+    public FilesInput(IFormFileCollection? formFileCollection)
     {
         Form = Some(formFileCollection);
         Paths = None<string[]>();
@@ -34,7 +34,7 @@ public class FormOrFileSystemFiles
     /// onstructs the files object from the file-collection of the web-form of the <paramref name="request"/>.
     /// </summary>
     /// <param name="request">Request to create the files for.</param>
-    public FormOrFileSystemFiles(HttpRequest request)
+    public FilesInput(HttpRequest request)
         : this(request.Form?.Files)
     {
     }
@@ -52,18 +52,18 @@ public class FormOrFileSystemFiles
     /// </summary>
     /// <param name="expectedFileNames">Collection of expected file names.</param>
     /// <returns></returns>
-    public Res<FormOrFileSystemFiles> Validate(string[] expectedFileNames)
+    public Res<FilesInput> Validate(string[] expectedFileNames)
     {
         if (Form.IsSome)
         {
             var files = Form.Unwrap();
             int nbFiles = files == null ? 0 : files.Count;
             if (files == null || nbFiles != expectedFileNames.Length)
-                return Err<FormOrFileSystemFiles>($"{nbFiles} files are provided. However, {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
+                return Err<FilesInput>($"{nbFiles} files are provided. However, {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
 
             foreach (var file in files)
                 if (!expectedFileNames.Contains(file.FileName))
-                    return Err<FormOrFileSystemFiles>($"Unexpected file '{file.FileName}': {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
+                    return Err<FilesInput>($"Unexpected file '{file.FileName}': {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
 
             return Ok(this);
         }
@@ -72,11 +72,11 @@ public class FormOrFileSystemFiles
             var files = Paths.Unwrap();
             int nbFiles = files == null ? 0 : files.Length;
             if (files == null || nbFiles != expectedFileNames.Length)
-                return Err<FormOrFileSystemFiles>($"{nbFiles} files are provided. However, {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
+                return Err<FilesInput>($"{nbFiles} files are provided. However, {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
 
             foreach (var file in files)
                 if (!expectedFileNames.Contains(Path.GetFileName(file)))
-                    return Err<FormOrFileSystemFiles>($"Unexpected file '{Path.GetFileName(file)}': {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
+                    return Err<FilesInput>($"Unexpected file '{Path.GetFileName(file)}': {expectedFileNames.Length} input files are expected: {string.Join(", ", expectedFileNames)}.");
 
             return Ok(this);
         }
