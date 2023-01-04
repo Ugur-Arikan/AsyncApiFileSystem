@@ -8,7 +8,7 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<VersionPrefix>0.0.3</VersionPrefix>
+		<VersionPrefix>0.0.4</VersionPrefix>
 		<Description>Library for a simple api for async long running requests, using the file system.</Description>
 		<PackageProjectUrl>https://ugur-arikan.github.io/AsyncApiFileSystem/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Ugur-Arikan/AsyncApiFileSystem</RepositoryUrl>

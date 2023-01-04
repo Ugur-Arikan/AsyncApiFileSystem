@@ -103,6 +103,7 @@ static void AddEndpoints(WebApplication app)
     app.MapGet("/flows/{jobId}", (string jobId) => Session.ReadText(jobId, "flows.csv").IntoHttpResult());
     app.MapGet("/costs/{jobId}", (string jobId) => Session.ReadText(jobId, "costs.csv").IntoHttpResult());
 
+
     // DOWNLOAD RESULTS
     app.MapGet("/download/flows/{jobId}", (string jobId) => Session.GetDownloadPath(jobId, "flows.csv").IntoFileResult("application/text"));
     app.MapGet("/download/costs/{jobId}", (string jobId) => Session.GetDownloadPath(jobId, "costs.csv").IntoFileResult("application/text"));

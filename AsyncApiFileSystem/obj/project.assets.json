@@ -216,7 +216,7 @@
     "C:\\Users\\uarik\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "0.0.3",
+    "version": "0.0.4",
     "restore": {
       "projectUniqueName": "I:\\uurdev\\dotnet\\AsyncApiFileSystem\\AsyncApiFileSystem\\AsyncApiFileSystem.csproj",
       "projectName": "AsyncApiFileSystem",
