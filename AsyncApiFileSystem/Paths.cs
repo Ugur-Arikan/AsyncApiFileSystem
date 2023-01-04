@@ -2,26 +2,26 @@
 
 namespace AsyncApiFileSystem;
 
-internal record Paths<K, F>(string Dir, F IdFact)
-    where K : IComparable<K>, IEquatable<K>
-    where F : IRunIdFactory<K>
+internal record Paths<Id, IdFact>(string Dir, IdFact IdFactory)
+    where Id : IComparable<Id>, IEquatable<Id>
+    where IdFact : IIdFactory<Id>
 {
     // paths
-    public string DirOf(K id)
-        => Path.Join(Dir, IdFact.ToDirectoryName(id));
-    public string BegOf(K id)
+    public string DirOf(Id id)
+        => Path.Join(Dir, IdFactory.ToDirectoryName(id));
+    public string BegOf(Id id)
         => Path.Join(DirOf(id), "___beg___.txt");
-    public string EndOf(K id)
+    public string EndOf(Id id)
         => Path.Join(DirOf(id), "___end___.txt");
-    public string ErrOf(K id)
+    public string ErrOf(Id id)
         => Path.Join(DirOf(id), "___err___.txt");
-    public string FileOf(K id, string filename)
+    public string FileOf(Id id, string filename)
         => Path.Combine(DirOf(id), filename);
 
     // id
-    public Res<K> NewId()
-        => IdFact.NewId(Dir);
-    public bool Exists(K id)
+    public Res<Id> NewId()
+        => IdFactory.NewId(Dir);
+    public bool Exists(Id id)
         => Directory.Exists(Path.Join(Dir, DirOf(id)));
 
 
@@ -29,18 +29,18 @@ internal record Paths<K, F>(string Dir, F IdFact)
     public Res<int> GetNbJobs()
         => OkIf(Directory.Exists(Dir))
         .TryMap(() => Directory.GetDirectories(Dir).Length);
-    public Res<HashSet<K>> GetAllIds()
+    public Res<HashSet<Id>> GetAllIds()
     {
         return OkIf(Directory.Exists(Dir))
             .TryMap(() => Directory.GetDirectories(Dir))
-            .TryMap(dirs => dirs.Select(dir => IdFact.ParseId(Path.GetFileName(dir))).ToHashSet());
+            .TryMap(dirs => dirs.Select(dir => IdFactory.ParseId(Path.GetFileName(dir))).ToHashSet());
     }
-    public Res CreateMissingDir(K id)
+    public Res CreateMissingDir(Id id)
     {
         DirectoryInfo dir = new(DirOf(id));
         return OkIf(!dir.Exists).Try(() => dir.Create());
     }
-    public Res Delete(K id)
+    public Res Delete(Id id)
     {
         string path = DirOf(id);
         var dir = new DirectoryInfo(path);
@@ -69,7 +69,7 @@ internal record Paths<K, F>(string Dir, F IdFact)
             RecursiveDelete(dir);
         baseDir.Delete(true);
     }
-    internal Res<string> Zip(K id, IEnumerable<string> paths, Opt<string> optZipFileName = default)
+    internal Res<string> Zip(Id id, IEnumerable<string> paths, Opt<string> optZipFileName = default)
     {
         string containingDir = DirOf(id);
         string zipFileName = optZipFileName.UnwrapOr(Path.GetRandomFileName);
