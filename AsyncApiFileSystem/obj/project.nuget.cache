@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "yDJklayNVjKxQlDUiwgT5jnmEaOcTxbeoVfd5PZv769KvhZW/CSA47D5YSiNwXRQEG3yYQ/cBul/Y/E9Uq/LAA==",
+  "dgSpecHash": "O5EpaAuw/6QV0o0glpPi0/iPw33kQvybWHvxPouC/3Kj6hgaE4Lqits7b+Iac6aiXVbPQqwYxAdzvHALFzeaIg==",
   "success": true,
   "projectFilePath": "I:\\uurdev\\dotnet\\AsyncApiFileSystem\\AsyncApiFileSystem\\AsyncApiFileSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\uarik\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\uarik\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\uarik\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
-    "C:\\Users\\uarik\\.nuget\\packages\\optres\\6.1.1\\optres.6.1.1.nupkg.sha512",
+    "C:\\Users\\uarik\\.nuget\\packages\\optres\\6.1.2\\optres.6.1.2.nupkg.sha512",
     "C:\\Users\\uarik\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
     "C:\\Users\\uarik\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512"
   ],

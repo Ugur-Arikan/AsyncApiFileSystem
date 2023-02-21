@@ -28,7 +28,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-		<PackageReference Include="OptRes" Version="6.1.1" />
+		<PackageReference Include="OptRes" Version="6.1.2" />
 	</ItemGroup>
 
 </Project>

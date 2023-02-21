@@ -10,7 +10,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
-          "OptRes": "6.1.1"
+          "OptRes": "6.1.2"
         },
         "runtime": {
           "AsyncApiFileSystem.dll": {}
@@ -48,11 +48,11 @@
           }
         }
       },
-      "OptRes/6.1.1": {
+      "OptRes/6.1.2": {
         "runtime": {
           "lib/net6.0/OptRes.dll": {
-            "assemblyVersion": "6.1.1.0",
-            "fileVersion": "6.1.1.0"
+            "assemblyVersion": "6.1.2.0",
+            "fileVersion": "6.1.2.0"
           }
         }
       },
@@ -94,12 +94,12 @@
       "path": "microsoft.extensions.primitives/5.0.1",
       "hashPath": "microsoft.extensions.primitives.5.0.1.nupkg.sha512"
     },
-    "OptRes/6.1.1": {
+    "OptRes/6.1.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-IrSdK6rlFe19bLzRhTMUOEb2LdiY0b7O6w3geSPyputydbI2Yg8jkofrjZZrxH1pOiC2zCKDBKAvLu+RqELoIg==",
-      "path": "optres/6.1.1",
-      "hashPath": "optres.6.1.1.nupkg.sha512"
+      "sha512": "sha512-QId7gS7Jh8+Eu0o12cvF7jicj2yvBNecNTBSkX5EIIPF9AuAbwaS+oNcljQiLNT/5Wgtti+XEeT0z8m2uN69Bw==",
+      "path": "optres/6.1.2",
+      "hashPath": "optres.6.1.2.nupkg.sha512"
     },
     "System.IO.Pipelines/5.0.2": {
       "type": "package",
