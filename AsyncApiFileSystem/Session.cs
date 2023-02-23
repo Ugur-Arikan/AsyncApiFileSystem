@@ -46,8 +46,7 @@ public class Session<Job, In, IdFact, Id>
 
     // method - io
     /// <summary>
-    /// Returns Ok of the execution directory of the job with the given <paramref name="id"/>;
-    /// Err if the directory is absent.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.GetJobDir(Id)"/>
     /// </summary>
     /// <param name="id">Id of the job.</param>
     public Res<string> GetJobDir(Id id)
@@ -59,35 +58,32 @@ public class Session<Job, In, IdFact, Id>
 
     // method - get
     /// <summary>
-    /// Returns the number of jobs.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.GetNbJobs"/>
     /// </summary>
     public Res<int> GetNbJobs()
         => Paths.GetNbJobs();
     /// <summary>
-    /// Returns whether the job with the given <paramref name="id"/> exists or not.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.DoesJobExist(Id)"/>
     /// </summary>
     /// <param name="id">Id of the job to investigate.</param>
-    public bool Exists(Id id)
+    public bool DoesJobExist(Id id)
         => Paths.Exists(id);
     /// <summary>
-    /// Tries to get and return the status of the job with the given <paramref name="id"/>;
-    /// returns Err if it fails.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.GetStatus(Id)"/>
     /// </summary>
     /// <param name="id">Id of the job to get the status of.</param>
     public Res<JobStatus<Id>> GetStatus(Id id)
         => JobStatus<Id>.New(id, Paths);
     /// <summary>
-    /// Tries to get the set of id's of all existing jobs;
-    /// returns Err if it fails.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.GetAllIds"/>
     /// </summary>
     public Res<HashSet<Id>> GetAllIds()
         => Paths.GetAllIds();
 
-    
+
     // method - download
     /// <summary>
-    /// Returns Ok of the download path of the given <paramref name="result"/> file of the job with the given <paramref name="id"/>;
-    /// returns the Err if it fails or is absent.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.GetDownloadPath(Id, string)"/>
     /// </summary>
     /// <param name="id">Id of the job.</param>
     /// <param name="result">Name of the result file.</param>
@@ -98,9 +94,7 @@ public class Session<Job, In, IdFact, Id>
         return OkIf(File.Exists(path), path, string.Format("Required file '{0}' does not exist.", Path.GetFileName(path)));
     }
     /// <summary>
-    /// Tries to zip the desired <paramref name="results"/> files of the job with the given <paramref name="id"/>
-    /// and returns Ok of the download path of the zip file;
-    /// returns the Err if it fails.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.GetDownloadPathZipped(Id, IEnumerable{string}, Opt{string})"/>
     /// </summary>
     /// <param name="id">Id of the job.</param>
     /// <param name="results">Set of the result files to zip.</param>
@@ -113,9 +107,7 @@ public class Session<Job, In, IdFact, Id>
             .FlatMap(paths => Paths.Zip(id, paths, optZipFileName));
     }
     /// <summary>
-    /// Tries to zip all result files of the job with the given <paramref name="id"/>
-    /// and returns Ok of the download path of the zip file;
-    /// returns the Err if it fails.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.GetDownloadPathZippedAll(Id, Opt{string})"/>
     /// </summary>
     /// <param name="id">Id of the job.</param>
     /// <param name="optZipFileName">Optional name for the zip file.</param>
@@ -125,16 +117,14 @@ public class Session<Job, In, IdFact, Id>
 
     // method - parse
     /// <summary>
-    /// Tries to read and return all text of the file with the given <paramref name="filename"/>
-    /// in the execution directory of the job with the given <paramref name="id"/>;
-    /// returns the Err if it fails.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.ReadText(Id, string)"/>
     /// </summary>
     /// <param name="id">Id of the job.</param>
     /// <param name="filename">Name of the file in the job's execution directory to read as text.</param>
     public Res<string> ReadText(Id id, string filename)
         => GetDownloadPath(id, filename).TryMap(path => File.ReadAllText(path));
     /// <summary>
-    /// Tries to parse the file into an instance of type <typeparamref name="R"/> and returns the result.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.ParseFile{R}(Id, string, Func{StreamReader, R})"/>
     /// </summary>
     /// <typeparam name="R">Type to parse the file's text into.</typeparam>
     /// <param name="id">Id of the job.</param>
@@ -154,9 +144,7 @@ public class Session<Job, In, IdFact, Id>
 
     // method - submit
     /// <summary>
-    /// Tries to submit the <paramref name="job"/> with the given <paramref name="input"/>;
-    /// while auto-generating its id and returing it;
-    /// returns Err if submission fails.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.SubmitGetId(Job, In)"/>
     /// </summary>
     /// <param name="job">Job to be submitted.</param>
     /// <param name="input">Inputs of the job.</param>
@@ -170,9 +158,7 @@ public class Session<Job, In, IdFact, Id>
         return SubmitWithId(job, input, id);
     }
     /// <summary>
-    /// Tries to submit the <paramref name="job"/> with the given <paramref name="input"/> and given <paramref name="id"/>
-    /// and returns back the Ok(id) if it succeeds;
-    /// returns Err if submission fails.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.SubmitWithId(Job, In, Id)"/>
     /// </summary>
     /// <param name="job">Job to be submitted.</param>
     /// <param name="input">Inputs of the job.</param>
@@ -200,24 +186,18 @@ public class Session<Job, In, IdFact, Id>
 
     // method - delete
     /// <summary>
-    /// Tries to delete the job with the given <paramref name="id"/>, and returns the result.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.Delete(Id)"/>
     /// </summary>
     /// <param name="id">Id of the job to delete.</param>
     public Res Delete(Id id)
         => Paths.Delete(id);
     /// <summary>
-    /// Tries to delete all existing jobs and returns the result.
+    /// <inheritdoc cref="ISession{Job, In, IdFact, Id}.DeleteAll"/>
     /// </summary>
     public Res DeleteAll()
         => Paths.GetAllIds()
         .Map(ids => ids.Select(id => Delete(id)).Reduce(false))
         .Flatten();
-    /// <summary>
-    /// Tries to delete a file with the given <paramref name="path"/>, and returns the result.
-    /// </summary>
-    /// <param name="path">Path of the file to delete.</param>
-    Res DeleteFile(string path)
-        => OkIf(File.Exists(path)).Try(() => File.Delete(path));
 
 
     // run
