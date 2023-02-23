@@ -43,7 +43,7 @@ public static class OptimizationService
     /// The session will automatically handle the long running optimization tasks in the background,
     /// and manage them using the file system.
     /// </summary>
-    static readonly Session<OptimizationJob, Input, IdFactString, string> Session;
+    static readonly SessionCore<OptimizationJob, Input, IdFactString, string> Session;
     /// <summary>
     /// Amount of milliseconds <see cref="OptimizationJob"/> will wait to simulate a long running process.
     /// </summary>

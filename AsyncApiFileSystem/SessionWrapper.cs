@@ -1,7 +1,7 @@
 ﻿namespace AsyncApiFileSystem;
 
 /// <summary>
-/// Wrapper for <see cref="Session{Job, In, IdFact, Id}"/> to simplify session type names.
+/// Wrapper for <see cref="SessionCore{Job, In, IdFact, Id}"/> to simplify session type names.
 /// </summary>
 /// <typeparam name="Job">Type of the job.</typeparam>
 /// <typeparam name="In">Type of inputs of jobs.</typeparam>
