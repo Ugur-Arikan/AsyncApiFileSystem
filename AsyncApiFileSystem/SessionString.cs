@@ -1,5 +1,8 @@
-﻿namespace AsyncApiFileSystem;
+﻿using AsyncApiFileSystem.Commons;
 
-public class SessionString
+namespace AsyncApiFileSystem;
+
+public class SessionString<Job, In> //: ISession<Job, In, IdFactString, string>
+    where Job : IJob<string, In>
 {
 }

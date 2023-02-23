@@ -8,7 +8,7 @@ namespace AsyncApiFileSystem;
 /// <typeparam name="In">Type of inputs of jobs.</typeparam>
 /// <typeparam name="IdFact">Type of the id factory.</typeparam>
 /// <typeparam name="Id">Type of the id (key) of jobs.</typeparam>
-public class Session<Job, In, IdFact, Id>
+public class Session<Job, In, IdFact, Id> : ISession<Job, In, IdFact, Id>
     where Job : IJob<Id, In>
     where Id : IComparable<Id>, IEquatable<Id>
     where IdFact : IIdFactory<Id>
