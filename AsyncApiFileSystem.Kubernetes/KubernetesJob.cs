@@ -1,4 +1,6 @@
-﻿namespace AsyncApiFileSystem.Kubernetes;
+﻿using AsyncApiFileSystem.Commons;
+
+namespace AsyncApiFileSystem.Kubernetes;
 
 public enum RestartPolicy
 {
@@ -6,7 +8,7 @@ public enum RestartPolicy
     OnFailure,
 }
 
-public class KubernetesJob
+public class KubernetesJobBuilder
 {
     // required
     public readonly string Name;
@@ -20,7 +22,7 @@ public class KubernetesJob
 
 
     // ctor
-    public KubernetesJob(string name, Container container)
+    public KubernetesJobBuilder(string name, Container container)
     {
         Name = name;
         Container = container;
@@ -28,7 +30,7 @@ public class KubernetesJob
     
 
     // from template
-    public KubernetesJob With(Opt<string> name = default, Opt<string[]> commands = default, Opt<Resource> resourceLimits = default, Opt<Resource> resourceRequests = default)
+    public KubernetesJobBuilder With(Opt<string> name = default, Opt<string[]> commands = default, Opt<Resource> resourceLimits = default, Opt<Resource> resourceRequests = default)
     {
         Container newContainer = Container.With(commands, resourceLimits, resourceRequests);
         string newName = name.Match(n => n, Name);
@@ -42,7 +44,7 @@ public class KubernetesJob
 
 
     // write
-    public void Write(StringBuilder sb)
+    public void WriteYaml(StringBuilder sb)
     {
         sb.AppendLine("apiVersion: batch/v1");
         sb.AppendLine("kind: Job");
@@ -96,5 +98,31 @@ public class KubernetesJob
             sb.AppendLine("      imagePullSecrets:");
             sb.Append("      - name: ").AppendLine(imagePullSecretsName.ToString());
         });
+    }
+}
+
+public abstract class KubernetesJob<In> : IJob<string, In>
+{
+    // required
+    public readonly Session<KubernetesJob<In>, In, IdFactString, string> Session;
+    internal readonly Func<string, Res<KubernetesJobBuilder>> KubernetesJobBuilder;
+
+
+    // ctor
+    public KubernetesJob(Session<KubernetesJob<In>, In, IdFactString, string> session, Func<string, Res<KubernetesJobBuilder>> kubernetesJobBuilder)
+    {
+        Session = session;
+        KubernetesJobBuilder = kubernetesJobBuilder;
+    }
+
+
+    // session
+    public abstract Res Init(string id, In input);
+    public Res Run(string id, Dictionary<string, StreamWriter> _)
+    {
+        using var exec = new KubernetesJobExec<In>(this, id);
+        var exeRes = exec.Execute();
+        exeRes.DoIfErr(err => Console.Error.WriteLine(err));
+        return exeRes.WithoutVal();
     }
 }

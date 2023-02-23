@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AsyncApiFileSystem.Kubernetes\AsyncApiFileSystem.Kubernetes.csproj" />
     <ProjectReference Include="..\AsyncApiFileSystem\AsyncApiFileSystem.csproj" />
   </ItemGroup>
 

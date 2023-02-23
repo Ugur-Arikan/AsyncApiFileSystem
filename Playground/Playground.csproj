@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AsyncApiFileSystem" Version="0.0.5" />
     <PackageReference Include="OptRes" Version="6.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AsyncApiFileSystem.Kubernetes\AsyncApiFileSystem.Kubernetes.csproj" />
-    <ProjectReference Include="..\AsyncApiFileSystem\AsyncApiFileSystem.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,12 +7,27 @@
 	<GenerateDocumentationFile>False</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="OptRes" Version="6.1.2" />
-  </ItemGroup>
+	<PropertyGroup>
+		<VersionPrefix>0.0.1</VersionPrefix>
+		<Description>Library for a simple api for async long running requests as kubernetes job, using the file system.</Description>
+		<PackageProjectUrl>https://ugur-arikan.github.io/AsyncApiFileSystem/</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Ugur-Arikan/AsyncApiFileSystem</RepositoryUrl>
+		<Authors>ugur-arikan</Authors>
+		<PackageTags>kubernetes;kubernetes job;job;asynchronous;api;long running task;file system</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
+	<ItemGroup>
+	  <None Include="..\README.md" Link="README.md">
+	    <PackagePath>\</PackagePath>
+	    <Pack>True</Pack>
+	  </None>
+	</ItemGroup>
+	
   <ItemGroup>
-    <ProjectReference Include="..\AsyncApiFileSystem\AsyncApiFileSystem.csproj" />
+    <PackageReference Include="AsyncApiFileSystem" Version="0.0.5" />
+    <PackageReference Include="OptRes" Version="6.1.2" />
   </ItemGroup>
 
 </Project>

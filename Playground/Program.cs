@@ -44,7 +44,7 @@ Container container = new(image)
 };
 
 
-KubernetesJob job = new("solver", container)
+KubernetesJobBuilder job = new("solver", container)
 {
     RestartPolicy = RestartPolicy.Never,
     ServiceAccountName = "default-editor",
@@ -52,5 +52,5 @@ KubernetesJob job = new("solver", container)
 };
 
 var sb = new StringBuilder();
-job.Write(sb);
+job.WriteYaml(sb);
 Console.WriteLine(sb.ToString());
