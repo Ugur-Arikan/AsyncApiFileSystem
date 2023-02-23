@@ -27,6 +27,16 @@ _UpgradeReport_Files/
 */obj/
 bin/
 obj/
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
+AsyncApiFileSystem\bin
+AsyncApiFileSystem\bin\
+AsyncApiFileSystem\bin\*
+
 TestResults/
 ###################
 # Web publish log #
