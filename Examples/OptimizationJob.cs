@@ -45,8 +45,8 @@ public class OptimizationJob : IJob<string, Input>
         if (IsThereAnError())
             return Err("something went wrong.");
 
-        // simulate work of 10 seconds
-        Thread.Sleep(OptimizationService.JobDelayMillisecons);
+        // simulate a long running process 
+        Thread.Sleep(ConfigJob.JobDelayMillisecons);
 
         // write some outputs
         var rng = new Random();

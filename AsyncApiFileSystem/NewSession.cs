@@ -5,7 +5,7 @@ namespace AsyncApiFileSystem;
 /// <summary>
 /// Static class for creating session variants.
 /// </summary>
-public static class Session
+public static class NewSession
 {
     /// <summary>
     /// Constructs and returns the session if succeeds; the error if the constructor fails.
@@ -24,6 +24,7 @@ public static class Session
     /// <typeparam name="Job">Type of the job.</typeparam>
     /// <typeparam name="In">Type of inputs of jobs.</typeparam>
     /// <param name="rootDirectory">Root directory of jobs of the session.</param>
+    /// <param name="getInputById">Function which returns the input corresponding to the given input id, which is used as a route parameter.</param>
     /// <param name="jobResults">Names of results of jobs.</param>
     public static Res<SessionDefault<Job, In>> Default<Job, In>(string rootDirectory, Opt<HashSet<string>> jobResults = default)
         where Job : IJob<string, In>

@@ -19,7 +19,7 @@ namespace AsyncApiFileSystem;
 public class SessionDefault<Job, In> : SessionWrapper<Job, In, IdFactString, string>
     where Job : IJob<string, In>
 {
-    SessionDefault(ISession<Job, In, IdFactString, string> session) : base(session) { }
+    protected SessionDefault(ISession<Job, In, IdFactString, string> session) : base(session) { }
     internal static Res<SessionDefault<Job, In>> New(string rootDirectory, Opt<HashSet<string>> jobResults)
     {
         return

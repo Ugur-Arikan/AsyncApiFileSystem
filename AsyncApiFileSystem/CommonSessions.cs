@@ -27,7 +27,8 @@ public static class CommonSessions
     public static Res<SessionCore<Job, In, IdFactString, string>> NewWithStringId<Job, In>(string rootDirectory, Opt<HashSet<string>> jobResults = default)
         where Job : IJob<string, In>
     {
-        return SessionCore<Job, In, IdFactString, string>.New(rootDirectory, new(), jobResults.UnwrapOr(new HashSet<string>()));
+        throw new Exception();
+        //return SessionCore<Job, In, IdFactString, string>.New(rootDirectory, new(), jobResults.UnwrapOr(new HashSet<string>()));
     }
     // id: string & input: FilesInput
     /// <summary>
@@ -49,7 +50,8 @@ public static class CommonSessions
     public static Res<SessionCore<Job, FilesInput, IdFactString, string>> NewWithStringIdFilesInput<Job>(string rootDirectory, Opt<HashSet<string>> jobResults = default)
         where Job : IJob<string, FilesInput>
     {
-        return SessionCore<Job, FilesInput, IdFactString, string>.New(rootDirectory, new(), jobResults.UnwrapOr(new HashSet<string>()));
+        throw new Exception();
+        //return SessionCore<Job, FilesInput, IdFactString, string>.New(rootDirectory, new(), jobResults.UnwrapOr(new HashSet<string>()));
     }
 
 
@@ -73,7 +75,8 @@ public static class CommonSessions
     public static Res<SessionCore<Job, In, IdFactGuid, Guid>> NewWithGuid<Job, In>(string rootDirectory, Opt<HashSet<string>> jobResults = default)
         where Job : IJob<Guid, In>
     {
-        return SessionCore<Job, In, IdFactGuid, Guid>.New(rootDirectory, new(), jobResults.UnwrapOr(new HashSet<string>()));
+        throw new Exception();
+        //return SessionCore<Job, In, IdFactGuid, Guid>.New(rootDirectory, new(), jobResults.UnwrapOr(new HashSet<string>()));
     }
     // id: guid & input: FilesInput
     /// <summary>
@@ -95,6 +98,7 @@ public static class CommonSessions
     public static Res<SessionCore<Job, FilesInput, IdFactGuid, Guid>> NewWithGuidFilesInput<Job>(string rootDirectory, Opt<HashSet<string>> jobResults = default)
         where Job : IJob<Guid, FilesInput>
     {
-        return SessionCore<Job, FilesInput, IdFactGuid, Guid>.New(rootDirectory, new(), jobResults.UnwrapOr(new HashSet<string>()));
+        throw new Exception();
+        //return SessionCore<Job, FilesInput, IdFactGuid, Guid>.New(rootDirectory, new(), jobResults.UnwrapOr(new HashSet<string>()));
     }
 }
